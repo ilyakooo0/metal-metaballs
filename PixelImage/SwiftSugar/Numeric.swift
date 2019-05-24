@@ -4,20 +4,13 @@ protocol DoubleValuable {
     static func fromDouble(_ double: Double) -> Self
 }
 
-postfix operator ++ { }
-
-protocol Incrementable {
-    postfix func ++ (_: inout Self) -> Self
-}
-
-protocol Numeric: DoubleValuable, Incrementable, Comparable,
+protocol Numeric: DoubleValuable, Comparable,
     ExpressibleByIntegerLiteral {
 
     @warn_unused_result func / (lhs: Self, rhs: Self) -> Self
     @warn_unused_result func - (lhs: Self, rhs: Self) -> Self
     @warn_unused_result func + (lhs: Self, rhs: Self) -> Self
     @warn_unused_result func * (lhs: Self, rhs: Self) -> Self
-    postfix func ++ (_: inout Self) -> Self
 }
 
 protocol FastNumeric: Numeric {}

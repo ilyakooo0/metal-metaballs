@@ -8,8 +8,8 @@ class MTLContext {
 
     init(device: MTLDevice = MTLCreateSystemDefaultDevice()!) {
         self.device = device
-        self.library = device.newDefaultLibrary()!
-        self.commandQueue = device.makeCommandQueue()
+        self.library = device.makeDefaultLibrary()!
+        self.commandQueue = device.makeCommandQueue()!
     }
 }
 

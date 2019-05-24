@@ -49,11 +49,11 @@ import ChameleonFramework
         let texture1 =
 			context.device.makeTexture(descriptor: textureDescriptor)
         activeComputeContext = MTLComputeContext(size: targetView.size,
-                                                 texture: texture1)
+                                                 texture: texture1!)
         let texture2 =
 			context.device.makeTexture(descriptor: textureDescriptor)
         idleComputeContext = MTLComputeContext(size: targetView.size,
-                                               texture: texture2)
+                                               texture: texture2!)
     }
 
     internal func updateTargetView() {
@@ -111,19 +111,19 @@ import ChameleonFramework
             // Send commands to metal and render
             let commandBuffer = context.commandQueue.makeCommandBuffer()
 
-            let commandEncoder = commandBuffer.makeComputeCommandEncoder()
-            commandEncoder.setComputePipelineState(pipeline)
-            commandEncoder.setTexture(computeContext.texture, at: 0)
+            let commandEncoder = commandBuffer!.makeComputeCommandEncoder()
+            commandEncoder!.setComputePipelineState(pipeline)
+            commandEncoder!.setTexture(computeContext.texture, index: 0)
             let metaballInfoBuffer = metaballBuffer()
-            commandEncoder.setBuffer(metaballInfoBuffer, offset: 0, at: 0)
+            commandEncoder!.setBuffer(metaballInfoBuffer, offset: 0, index: 0)
             let edgesBuffer = metaballEdgesBuffer()
-            commandEncoder.setBuffer(edgesBuffer, offset: 0, at: 1)
-            commandEncoder.dispatchThreadgroups(threadGroups,
+            commandEncoder!.setBuffer(edgesBuffer, offset: 0, index: 1)
+            commandEncoder!.dispatchThreadgroups(threadGroups,
                 threadsPerThreadgroup: threadGroupCounts)
-            commandEncoder.endEncoding()
+            commandEncoder!.endEncoding()
 
-            commandBuffer.commit()
-            commandBuffer.waitUntilCompleted()
+            commandBuffer!.commit()
+            commandBuffer!.waitUntilCompleted()
         } catch _ {
             assertionFailure()
         }
@@ -186,7 +186,7 @@ import ChameleonFramework
                                                length: bufferLength,
                                                options: MTLResourceOptions())
 
-        return buffer
+        return buffer!
     }
 
     internal func metaballBuffer() -> MTLBuffer {
@@ -228,6 +228,6 @@ import ChameleonFramework
                                                length: bufferLength,
                                                options: MTLResourceOptions())
 
-        return buffer
+        return buffer!
     }
 }

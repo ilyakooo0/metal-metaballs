@@ -80,7 +80,7 @@ class ViewController: UIViewController, MetaballDataSource {
 		delay(4) {
 			for i in 1...5 {
 				UIView.animate(withDuration: 1.0, delay: 0,
-				                           options: UIViewAnimationOptions(),
+				                           options: UIView.AnimationOptions(),
 				                           animations: { () -> Void in
 					let sine = sin(Double(i) * 2 * .pi / 5)
 					let cosine = cos(Double(i) * 2 * .pi / 5)
@@ -98,7 +98,7 @@ class ViewController: UIViewController, MetaballDataSource {
 				UIView.animate(withDuration: 1.0, delay: 0,
 				                           usingSpringWithDamping: 0.5,
 				                           initialSpringVelocity: 0,
-				                           options: UIViewAnimationOptions(),
+				                           options: UIView.AnimationOptions(),
 				                           animations: { () -> Void in
 					let sine = sin(Double(i) * 2 * .pi / 5)
 					let cosine = cos(Double(i) * 2 * .pi / 5)
@@ -136,7 +136,7 @@ class ViewController: UIViewController, MetaballDataSource {
 			repeats: true)
 	}
 
-	func animateMetaball(withTimer timer: Timer) {
+	@objc func animateMetaball(withTimer timer: Timer) {
 		guard let userInfo = timer.userInfo as? VertexAnimationParameters else {
 			preconditionFailure()
 		}
@@ -174,7 +174,7 @@ class ViewController: UIViewController, MetaballDataSource {
 			repeats: true)
 	}
 
-	func animateEdge(withTimer timer: Timer) {
+	@objc func animateEdge(withTimer timer: Timer) {
 		guard let userInfo = timer.userInfo as? EdgeAnimationParameters else {
 			preconditionFailure()
 		}
@@ -199,7 +199,7 @@ class ViewController: UIViewController, MetaballDataSource {
 		renderer.state = .running
 	}
 
-	func handlePan(_ recognizer: UIPanGestureRecognizer) {
+	@objc func handlePan(_ recognizer: UIPanGestureRecognizer) {
 		let location = recognizer.location(in: metaballView)
 
 		if selectedMetaball == nil {

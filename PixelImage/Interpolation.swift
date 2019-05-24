@@ -14,7 +14,8 @@ func interpolateSquareEaseOut<T: Numeric>(_ linear: T) -> T {
 }
 
 func interpolateSmooth<T: Numeric>(_ linear: T) -> T {
-    return ((linear) * (linear) * (linear) * ((linear) * ((linear) * 6 - 15) + 10))
+    let cube = (linear) * (linear) * (linear)
+    return (cube * ((linear) * ((linear) * 6 - 15) + 10))
 }
 
 func createStringKeyframes(_ bounces: Int = 2, elasticity: Double = 1.1, bounceSpeed: Double) -> [(time: Double, position: Double)] {

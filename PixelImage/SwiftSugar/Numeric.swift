@@ -7,10 +7,10 @@ protocol DoubleValuable {
 protocol Numeric: DoubleValuable, Comparable,
     ExpressibleByIntegerLiteral {
 
-    @warn_unused_result func / (lhs: Self, rhs: Self) -> Self
-    @warn_unused_result func - (lhs: Self, rhs: Self) -> Self
-    @warn_unused_result func + (lhs: Self, rhs: Self) -> Self
-    @warn_unused_result func * (lhs: Self, rhs: Self) -> Self
+    static func / (lhs: Self, rhs: Self) -> Self
+    static func - (lhs: Self, rhs: Self) -> Self
+    static func + (lhs: Self, rhs: Self) -> Self
+    static func * (lhs: Self, rhs: Self) -> Self
 }
 
 protocol FastNumeric: Numeric {}

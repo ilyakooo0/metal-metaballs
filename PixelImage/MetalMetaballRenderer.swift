@@ -45,6 +45,7 @@ import ChameleonFramework
 				width: width,
 				height: height,
 				mipmapped: false)
+        textureDescriptor.usage = .shaderWrite
 
         let texture1 =
 			context.device.makeTexture(descriptor: textureDescriptor)
@@ -62,9 +63,7 @@ import ChameleonFramework
 
         state = .ending
 
-        let userInteractiveQueue =
-			DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
-        userInteractiveQueue.async { () -> Void in
+        DispatchQueue.main.async { () -> Void in
             let computeContext = self.activeComputeContext
             swap(&self.activeComputeContext, &self.idleComputeContext)
 
